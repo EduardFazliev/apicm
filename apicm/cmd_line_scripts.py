@@ -160,6 +160,12 @@ def get_yarn_resource_manager():
         print host
 
 
+def get_broker_id():
+    cloudera_manager, args = get_cm_api()
+    message = cloudera_manager.get_kafka_broker_id_by_hostname(nodename=args.hostname)
+    print message
+
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--cm-host', type=str, help='Host with cloudera manager.', default=None)

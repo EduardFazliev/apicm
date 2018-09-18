@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='apicm',
-      version='0.1',
+      version='0.1.1',
       description='Cloudera Manager API implementation based on cm_api module.',
       url='https://github.com/integralads/niagara',
       author='Eduard Fazliev',
@@ -31,7 +31,8 @@ setup(name='apicm',
                     'restart-kafka-broker=apicm.cmd_line_scripts:restart_kafka_broker',
                     'get-kafka-broker-status=apicm.cmd_line_scripts:get_kafka_broker_status',
                     'get-kafka-broker-log-dirs=apicm.cmd_line_scripts:get_log_dirs_list',
-                    'get-yarn-rm-host=apicm.cmd_line_scripts:get_yarn_resource_manager'
+                    'get-yarn-rm-host=apicm.cmd_line_scripts:get_yarn_resource_manager',
+                    'get-broker-id=apicm.cmd_line_scripts:get_broker_id'
                 ],
       },
       zip_safe=False)

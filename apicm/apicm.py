@@ -39,6 +39,16 @@ class NiagaraCMApi(object):
             result.append(self.api.get_host(host_reference).hostname)
         return result
 
+    def get_kafka_broker_id_by_hostname(self, nodename, role='KAFKA_BROKER', service_name='kafka'):
+        cluster = self.api.get_cluster(self.cluster)
+        service = cluster.get_service(service_name)
+        service_nodes = service.get_roles_by_type(role)
+        for node in service_nodes:
+            hostname = self.api.get_host(node.hostRef.hostId).hostname
+            if hostname == nodename:
+                broker_id = node.get_config()['broker.id']
+                return broker_id
+
     def get_service_ports(self, service_name, role_config_group):
         """
         Method gets ports of specific type of service.
@@ -187,6 +197,8 @@ class NiagaraCMApi(object):
 
 
 if __name__ == '__main__':
+    c = NiagaraCMApi(cm_host='s-niagcm01.nj01.303net.pvt', user='efazliev', password='IAMKolossus4')
+    c.get_kafka_broker_id_by_hostname('s-niagara04.nj01.303net.pvt')
     print (
        'This module should not be called directly. '
        'Please install it via pip use apicm-help to get list of available commands.'
