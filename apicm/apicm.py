@@ -49,6 +49,16 @@ class NiagaraCMApi(object):
                 broker_id = node.get_config()['broker.id']
                 return broker_id
 
+    def get_all_brokers_id(self, role='KAFKA_BROKER', service_name='kafka'):
+        cluster = self.api.get_cluster(self.cluster)
+        service = cluster.get_service(service_name)
+        service_nodes = service.get_roles_by_type(role)
+        broker_ids = list()
+        for node in service_nodes:
+            broker_id = node.get_config()['broker.id']
+            broker_ids.append(broker_id)
+        return broker_ids
+
     def get_service_ports(self, service_name, role_config_group):
         """
         Method gets ports of specific type of service.
